@@ -1,0 +1,14 @@
+#!/bin/bash
+SVN="/usr/bin/svn"
+
+$SVN st | \
+while read line
+do
+    if [ ${line:0:1} == "?" ]; then
+        $SVN add "${line:8}"
+    fi
+    if [ ${line:0:1} == "!" ]; then
+        $SVN rm "${line:8}"
+    fi
+done
+
